@@ -1,0 +1,17 @@
+<?php
+
+namespace DummyNamespace;
+
+use DummyContractsNamespace\CommandInterface;
+use DummyContractsNamespace\HandlerInterface;
+
+class DummyClass implements HandlerInterface
+{
+    /**
+     * { @inheritdoc }
+     */
+    public function handle(CommandInterface $command)
+    {
+        //
+    }
+}

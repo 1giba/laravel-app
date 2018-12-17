@@ -1,0 +1,24 @@
+<?php
+
+namespace DummyNamespace;
+
+use Illuminate\Database\Eloquent\Model;
+use Laracasts\Presenter\PresentableTrait;
+use DummyFullPresenterClass;
+
+class DummyClass extends Model
+{
+    use PresentableTrait;
+
+    /**
+     * @var string
+     */
+    protected $presenter = DummyPresenterClass::class;
+
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        //
+    ];
+}

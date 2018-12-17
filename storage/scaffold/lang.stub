@@ -1,0 +1,14 @@
+<?php
+
+return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | DummyResourceClass Language Lines
+    |--------------------------------------------------------------------------
+    |
+    */
+    'title'  => 'DummyResourcesClass',
+    'create' => 'New DummyResourceClass',
+    'edit' => 'DummyResourceClass #{0}',
+];

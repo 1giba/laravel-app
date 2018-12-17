@@ -1,0 +1,5 @@
+<li class="nav-item">
+    <a href="{{ url('/DummyResourcesVariable') }}" class="nav-link">
+        <i class="fa fa-angle-right"></i> @lang('DummyResourcesVariable.title')
+    </a>
+</li>

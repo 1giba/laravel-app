@@ -1,0 +1,13 @@
+
+/**
+ * DummyResourcesClass
+ */
+Route::get('/DummyResourcesVariable', 'DummyControllerClass@index');
+Route::get('/DummyResourcesVariable/create', 'DummyControllerClass@create');
+Route::post('/DummyResourcesVariable', 'DummyControllerClass@store');
+Route::get('/DummyResourcesVariable/{id}', 'DummyControllerClass@show')
+    ->where('id', '[0-9]+');
+Route::put('/DummyResourcesVariable/{id}', 'DummyControllerClass@update')
+    ->where('id', '[0-9]+');
+Route::delete('/DummyResourcesVariable/{id}', 'DummyControllerClass@delete')
+    ->where('id', '[0-9]+');

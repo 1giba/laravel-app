@@ -1,0 +1,16 @@
+<?php
+
+namespace DummyNamespace;
+
+use DummyFullModelClass;
+
+class DummyClass extends AbstractRepository
+{
+    /**
+     * { @inheritdoc }
+     */
+    public function model(): string
+    {
+        return DummyModelClass::class;
+    }
+}

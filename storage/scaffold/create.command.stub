@@ -1,0 +1,10 @@
+<?php
+
+namespace DummyNamespace;
+
+use DummyCommandsNamespace\Common\BaseCreate;
+
+class DummyClass implements BaseCreate
+{
+    //
+}

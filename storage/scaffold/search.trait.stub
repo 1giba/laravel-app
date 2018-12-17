@@ -1,0 +1,53 @@
+<?php
+
+namespace DummyNamespace;
+
+use Illuminate\Pagination\LengthAwarePaginator;
+use DummyFullRepositoryClass;
+
+trait DummyClass
+{
+    /**
+     * @var \DummyFullRepositoryClass
+     */
+    protected $DummyRepositoryVariable;
+
+    /**
+     * Get repository
+     *
+     * @return \DummyFullRepositoryClass
+     */
+    public function getDummyRepositoryClass(): DummyRepositoryClass
+    {
+        if (! $this->DummyRepositoryVariable) {
+            $this->DummyRepositoryVariable = app(DummyRepositoryClass::class);
+        }
+
+        return $this->DummyRepositoryVariable;
+    }
+
+    /**
+     * Paginate
+     *
+     * @param array $requests
+     * @return \Illuminate\Pagination\LengthAwarePaginator
+     */
+    public function paginateDummyPluralClass(array $requests): LengthAwarePaginator
+    {
+        return $this->getDummyRepositoryClass()
+            ->queryString($requests)
+            ->paginate();
+    }
+
+    /**
+     * Find By ID
+     *
+     * @param int $DummyModelVariableId
+     * @return mixed
+     */
+    public function findDummyModelClass(int $DummyModelVariableId)
+    {
+        return $this->getDummyRepositoryClass()
+            ->find($DummyModelVariableId);
+    }
+}

@@ -1,0 +1,35 @@
+<?php
+
+namespace DummyNamespace;
+
+use DummyContractsNamespace\CommandInterface;
+use DummyContractsNamespace\HandlerInterface;
+use DummyRepositoryFullClass;
+
+class DummyClass implements HandlerInterface
+{
+    /**
+     * @var \DummyRepositoryFullClass
+     */
+    protected $DummyRepositoryVariable;
+
+    /**
+     * @param \DummyRepositoryFullClass $DummyRepositoryVariable
+     * @return void
+     */
+    public function __construct(DummyRepositoryClass $DummyRepositoryVariable)
+    {
+        $this->DummyRepositoryVariable = $DummyRepositoryVariable;
+    }
+
+    /**
+     * { @inheritdoc }
+     */
+    public function handle(CommandInterface $command)
+    {
+        return $this->DummyRepositoryVariable->update(
+            $command->getData(),
+            $command->getId()
+        );
+    }
+}

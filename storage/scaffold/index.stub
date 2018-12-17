@@ -1,0 +1,71 @@
+@extends('partials.template')
+
+@section('title') | @lang('DummyResourcesVariable.title') @endsection
+
+@section('contents')
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-light">
+                    @lang('DummyResourcesVariable.title')
+                </div>
+
+                <div class="card-body">
+                    <form action="{{ url('/DummyResourcesVariable') }}" method="GET">
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="id" class="form-control-label">ID</label>
+                                <input id="id" name="id" class="form-control" placeholder="ID" value="{{ request('id') }}">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="sort" class="form-control-label">@lang('app.order_by')</label>
+                                <select id="sort" name="sort" class="form-control">
+                                    <option value="id" {{ request('sort') == 'id' ? 'selected' : '' }}>ID @lang('app.asc')</option>
+                                    <option value="-id" {{ request('sort') == '-id' ? 'selected' : '' }}>ID @lang('app.desc')</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i> @lang('app.search')</button>
+                            <a href="{{ url('/DummyResourcesVariable') }}" class="btn btn-warning" type="reset"><i class="fa fa-trash"></i> @lang('app.clear')</a>
+                        </div>
+                        <div class="col-md-9 text-right">
+                            <a href="{{ url('/DummyResourcesVariable/create') }}" class="btn btn-default" type="reset"><i class="fa fa-binoculars"></i> @lang('app.new', ['resource' => 'DummyResourceClass']) </a>
+                        </div>
+                    </div>
+                    </form>
+
+                    <br>
+
+                    @if ($DummyResourcesVariable)
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach ($DummyResourcesVariable as $DummyResourceVariable)
+                            <tr>
+                                <td><a href="{{ url('/DummyResourcesVariable', $DummyResourceVariable->id) }}">{{ $DummyResourceVariable->id }}</td>
+                            </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+
+                    {{ $DummyResourcesVariable->links() }}
+
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection

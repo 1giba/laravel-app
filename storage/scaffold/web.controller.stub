@@ -1,0 +1,144 @@
+<?php
+
+namespace DummyControllerNamespace;
+
+use Illuminate\Http\Request;
+use DummyFullCreateCommandClass;
+use DummyFullUpdateCommandClass;
+use DummyFullDeleteCommandClass;
+use DummyTraitsNamespace\DispatchesServices;
+use DummyTraitsNamespace\DummySearchClass;
+use Validator;
+
+class DummyControllerClass extends Controller
+{
+    use DispatchesServices, DummySearchClass;
+
+    /**
+     * DummyResourcesClass index
+     *
+     * @param Request $request
+     * @return mixed
+     */
+    public function index(Request $request)
+    {
+        $DummyResourcesVariable = $this->paginateDummyResourcesClass($request->all() ?? []);
+
+        return view('DummyResourcesVariable.index', [
+            'DummyResourcesVariable' => $DummyResourcesVariable,
+        ]);
+    }
+
+    /**
+     * Show create form
+     *
+     * @return mixed
+     */
+    public function create()
+    {
+        return view('DummyResourcesVariable.create');
+    }
+
+    /**
+     * Create a new resource
+     *
+     * @param Request $request
+     * @return mixed
+     */
+    public function store(Request $request)
+    {
+        $inputs    = $request->all();
+        $validator = Validator::make($inputs, [
+            // Validations here
+        ]);
+        if ($validator->fails()) {
+            return back()
+                ->withInput()
+                ->withErrors($validator);
+        }
+
+        if ($DummyResourceVariable = $this->dispatchService(DummyCreateCommandClass::class, [
+                'data' => $inputs,
+            ])) {
+            return redirect('/DummyResourcesVariable?id=' . $DummyResourceVariable->id)
+                ->with('success', 'Created!!');
+        }
+
+        return back()
+            ->withInput()
+            ->with('error', 'Error request!!');
+    }
+
+    /**
+     * Show resource by ID
+     *
+     * @param int $DummyResourceVariableId
+     * @return mixed
+     */
+    public function show(int $DummyResourceVariableId)
+    {
+        $DummyResourceVariable = $this->findDummyResourceClass($DummyResourceVariableId);
+
+        if (! $DummyResourceVariable) {
+            return redirect('/DummyResourcesVariable')
+                ->with('warning', 'Not found!!');
+        }
+
+        return view('DummyResourcesVariable.edit', [
+            'DummyResourceVariable' => $DummyResourceVariable,
+        ]);
+    }
+
+    /**
+     * Update data
+     *
+     * @param Request $request
+     * @param int $DummyResourceVariableId
+     * @return mixed
+     */
+    public function update(Request $request, int $DummyResourceVariableId)
+    {
+        $inputs    = $request->all();
+        $validator = Validator::make($inputs, [
+            // Validation here
+        ]);
+        if ($validator->fails()) {
+            return back()
+                ->withInput()
+                ->withErrors($validator);
+        }
+
+        if ($this->dispatchService(DummyUpdateCommandClass::class, [
+                'data'          => $inputs,
+                'resourceId'    => $DummyResourceVariableId,
+            ])) {
+            return redirect('/DummyResourcesVariable?id=' . $DummyResourceVariableId)
+                ->with('success', 'Data updated!!');
+        }
+
+        return back()
+            ->withInput()
+            ->with('error', 'Error request!!');
+    }
+
+    /**
+     * Delete resource by ID
+     *
+     * @param int $DummyResourceVariableId
+     * @return mixed
+     */
+    public function delete(int $DummyResourceVariableId)
+    {
+        $deleted = $this->dispatchService(DummyDeleteCommandClass::class, [
+            'resourceId' => $DummyResourceVariableId,
+        ]);
+
+        if (! $deleted) {
+            return redirect('/DummyResourcesVariable')
+                ->with('warning', 'Not found!!');
+        }
+
+        return redirect('/DummyResourcesVariable')
+            ->with('success', 'Deleted!!');
+    }
+}
