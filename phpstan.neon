@@ -4,6 +4,7 @@ parameters:
         - '#Call to static method [a-zA-Z0-9\\_]+\(\) on an unknown class [a-zA-Z0-9\\_]+#'
         - '#Method [a-zA-Z0-9\\_]+\\Exceptions\\Handler::render\(\) should return Illuminate\\Http\\Response but returns Symfony\\Component\\HttpFoundation\\Response#'
         - '#Call to an undefined method Illuminate\\Contracts\\Foundation\\Application::getNamespace\(\)#'
+        - '#Access to an undefined property [a-zA-Z0-9\\_]+Presenters+[a-zA-Z0-9\\_]#'
 
     excludes_analyse:
             - %rootDir%/../../../tests/*

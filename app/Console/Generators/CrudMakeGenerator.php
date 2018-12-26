@@ -154,7 +154,9 @@ class CrudMakeGenerator extends Command
     protected function exportViews()
     {
         foreach ($this->views as $key => $value) {
-            if (file_exists($view = resource_path('views/' . $this->dummies['DummyResourcesVariable'] . '/' . $value)) && ! $this->option('force')) {
+            if (file_exists($view = resource_path('views/' .
+                $this->dummies['DummyResourcesVariable'] . '/' . $value)) &&
+                ! $this->option('force')) {
                 if (! $this->confirm("The [{$value}] view already exists. Do you want to replace it?")) {
                     continue;
                 }

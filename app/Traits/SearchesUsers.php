@@ -19,7 +19,7 @@ trait SearchesUsers
      */
     public function getUserRepository(): UserRepository
     {
-        if (! $this->userRepository) {
+        if ($this->userRepository === null) {
             $this->userRepository = app(UserRepository::class);
         }
 

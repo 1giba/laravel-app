@@ -19,7 +19,7 @@ trait SearchesRoles
      */
     public function getRoleRepository(): RoleRepository
     {
-        if (! $this->roleRepository) {
+        if ($this->roleRepository === null) {
             $this->roleRepository = app(RoleRepository::class);
         }
 
