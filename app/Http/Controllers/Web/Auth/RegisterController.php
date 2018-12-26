@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Http\Controllers\Web\WebController;
+use Config;
 
 class RegisterController extends WebController
 {
@@ -28,7 +29,7 @@ class RegisterController extends WebController
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/dashboard';
 
     /**
      * Create a new controller instance.
@@ -63,10 +64,14 @@ class RegisterController extends WebController
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+        if ($defaultRole = Config::get('permission.create.default_role')) {
+            $user->assingRole($defaultRole);
+        }
+        return $user;
     }
 }

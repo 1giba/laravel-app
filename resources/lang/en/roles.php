@@ -12,5 +12,6 @@ return [
 
     'index' => 'Roles',
     'name' => 'Name',
-    'guard_name' => 'Alias',
+    'delete' => 'Delete Role',
+    'delete_message' => 'Are you sure you want delete the role #:id?',
 ];

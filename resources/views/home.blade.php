@@ -85,9 +85,9 @@
                 </div>
 
                 <div class="links">
-                    <a href="https://github.com/1giba/laravel-app/wiki">Documentation</a>
-                    <a href="https://github.com/1giba/laravel-app/issues">Have a problem?</a>
-                    <a href="https://github.com/1giba/laravel-app">GitHub</a>
+                    <a href="https://github.com/1giba/laravel-app/wiki" target="_blank">Documentation</a>
+                    <a href="https://github.com/1giba/laravel-app/issues" target="_blank">Have a problem?</a>
+                    <a href="https://github.com/1giba/laravel-app" target="_blank">GitHub</a>
                 </div>
             </div>
         </div>

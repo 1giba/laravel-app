@@ -124,4 +124,11 @@ return [
          */
         'store' => 'default',
     ],
+
+    /*
+     * Add guard_name to assign role in creation
+     */
+    'create' => [
+        'default_role' => null,
+    ],
 ];

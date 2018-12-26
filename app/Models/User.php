@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
 use Laracasts\Presenter\PresentableTrait;
 use App\Models\Presenters\UserPresenter;
 
 class User extends Authenticatable
 {
-    use Notifiable, PresentableTrait;
+    use Notifiable, HasRoles, PresentableTrait;
 
     /**
      * @var string

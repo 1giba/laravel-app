@@ -31,13 +31,15 @@
                                 <tr>
                                     <th scope="row">{{ $user->id }}</th>
                                     <td><img class="img-avatar row-img" src="{{ url($user->present()->avatar) }}"></td>
-                                    <td>{{ $user->name }}</td>
+                                    <td>{{ ! $user->roles->isEmpty() ? $user->roles[0]->name : '' }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>
                                         <a href="{{ url('/users', $user->id) }}/activities" alt="@lang('users.show_activities')"><i class="fa fa-search"></i></a>&nbsp;
-                                        <a href="{{ url('/users', $user->id) }}"><i class="fa fa-edit" alt="@lang('users.edit')"></i></a>&nbsp;
-                                        <a href="#" data-toggle="modal" data-target="#deleteUserModal" data-user-id="{{ $user->id }}" data-action="{{ url('/users', $user->id) }}" data-message="@lang('users.delete_message')"><i class="fa fa-trash" alt=""></i></a>
+                                        <a href="{{ url('/users', $user->id) }}"><i class="fa fa-edit" alt="@lang('users.edit')"></i></a>
+                                        @if ($user->id != Auth::user()->id)
+                                        &nbsp;<a href="#" data-toggle="modal" data-target="#deleteModal" data-resource-id="{{ $user->id }}" data-action="{{ url('/users', $user->id) }}" data-title="@lang('users.delete')" data-message="@lang('users.delete_message')"><i class="fa fa-trash" alt=""></i></a>
+                                        @endif
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -49,43 +51,10 @@
             </div>
         </div>
     </div>
-    <!-- Modal -->
-    <div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="deleteUserModal" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteUserModalLabel">@lang('users.delete')</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            <div class="modal-body">
-                <span id="deleteMessage"></span>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('app.close')</button>
-                <form method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">@lang('app.delete')</button>
-                </form>
-            </div>
-        </div>
-    </div>
+    @include('layouts.deleteModal')
 </div>
 @endsection
 
 @section('javascript')
-<script>
-    $('#deleteUserModal').on('show.bs.modal', function (event) {
-        var link   = $(event.relatedTarget);
-        var userId = link.data('user-id');
-        var action = link.data('action');
-        var message = link.data('message');
-
-        message = message.replace(':id', userId);
-        $('#deleteMessage')[0].innerText = message;
-        $(this).find('.modal-footer form').attr('action', action);
-    });
-</script>
+@include('layouts.deleteScript')
 @endsection
